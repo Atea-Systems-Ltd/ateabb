@@ -116,14 +116,16 @@ class LicensingStore extends BudiStore<LicensingState> {
     if (userLimit === UNLIMITED || userLimit === undefined) {
       return false
     }
-    return userCount >= userLimit
+    //return userCount >= userLimit
+    return false
   }
 
   usersLimitExceeded(userCount: number, userLimit = get(this.store).userLimit) {
     if (userLimit === UNLIMITED || userLimit === undefined) {
       return false
     }
-    return userCount > userLimit
+    //return userCount > userLimit
+    return false
   }
 
   aiCreditsExceeded(
