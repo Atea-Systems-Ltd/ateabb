@@ -315,7 +315,8 @@ class LicensingStore extends BudiStore<LicensingState> {
     }
 
     const userQuota = license.quotas.usage.static.users
-    const userLimit = userQuota.value
+    let userLimit = userQuota.value
+    userLimit = 50
     const aiCreditsQuota = license.quotas.usage.monthly.budibaseAICredits
     const aiCreditsLimit = aiCreditsQuota.value
     const actionsQuota = license.quotas.usage.monthly.actions
@@ -338,6 +339,7 @@ class LicensingStore extends BudiStore<LicensingState> {
       userLimitExceeded
 
     this.update(state => {
+      console.log("Licensing update() called. userLimit: " + userLimit)
       return {
         ...state,
         usageMetrics: { ...monthlyMetrics, ...staticMetrics },
