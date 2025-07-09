@@ -1,0 +1,16 @@
+[Unit]
+Description=Compose-managed Docker application
+Requires=docker.service
+After=docker.service network.target
+
+[Service]
+Type=exec
+WorkingDirectory=/opt/budibase
+ExecStart=/usr/bin/docker compose --env-file hosting/hosting.properties -f hosting/docker-compose.dev.yaml -f hosting/docker-compose.build.yaml up --build --remove-orphans
+ExecStop=/usr/bin/docker compose -f hosting/docker-compose.dev.yaml -f hosting/docker-compose.build.yaml down
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
