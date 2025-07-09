@@ -181,21 +181,19 @@ const environment = {
   INTERNAL_API_KEY: process.env.INTERNAL_API_KEY,
   INTERNAL_API_KEY_FALLBACK: process.env.INTERNAL_API_KEY_FALLBACK,
   MULTI_TENANCY: process.env.MULTI_TENANCY,
-  ACCOUNT_PORTAL_URL:
-    process.env.ACCOUNT_PORTAL_URL || "https://account.budibase.app",
+  ACCOUNT_PORTAL_URL: "", //** process.env.ACCOUNT_PORTAL_URL || "https://account.budibase.app",
   INTERNAL_ACCOUNT_PORTAL_URL:
     process.env.INTERNAL_ACCOUNT_PORTAL_URL ||
-    process.env.ACCOUNT_PORTAL_URL ||
-    "https://account.budibase.app",
+    process.env.ACCOUNT_PORTAL_URL || "", //** "https://account.budibase.app",
   ACCOUNT_PORTAL_API_KEY: process.env.ACCOUNT_PORTAL_API_KEY || "",
-  BUDICLOUD_URL: process.env.BUDICLOUD_URL || "https://budibase.app",
-  DISABLE_ACCOUNT_PORTAL: process.env.DISABLE_ACCOUNT_PORTAL,
-  SELF_HOSTED: selfHosted,
+  BUDICLOUD_URL: "", //**  process.env.BUDICLOUD_URL || "https://budibase.app",
+  DISABLE_ACCOUNT_PORTAL: 1, //** process.env.DISABLE_ACCOUNT_PORTAL,
+  SELF_HOSTED: 1, //** selfHosted,
   COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
   PLATFORM_URL: process.env.PLATFORM_URL || "",
   POSTHOG_TOKEN: process.env.POSTHOG_TOKEN,
   POSTHOG_PERSONAL_TOKEN: process.env.POSTHOG_PERSONAL_TOKEN,
-  POSTHOG_API_HOST: process.env.POSTHOG_API_HOST || "https://us.i.posthog.com",
+  POSTHOG_API_HOST:  process.env.POSTHOG_API_HOST || "https://us.i.posthog.com",
   POSTHOG_FEATURE_FLAGS_ENABLED: process.env.POSTHOG_FEATURE_FLAGS_ENABLED,
   ENABLE_ANALYTICS: process.env.ENABLE_ANALYTICS,
   TENANT_FEATURE_FLAGS: process.env.TENANT_FEATURE_FLAGS,
@@ -248,7 +246,7 @@ const environment = {
     : false,
   ...getPackageJsonFields(),
   DISABLE_PINO_LOGGER: process.env.DISABLE_PINO_LOGGER,
-  OFFLINE_MODE: process.env.OFFLINE_MODE,
+  OFFLINE_MODE: 1, //** process.env.OFFLINE_MODE,
   SESSION_EXPIRY_SECONDS: process.env.SESSION_EXPIRY_SECONDS,
   _set(key: any, value: any) {
     process.env[key] = value
@@ -265,6 +263,8 @@ const environment = {
   DISABLE_CONTENT_SECURITY_POLICY: process.env.DISABLE_CONTENT_SECURITY_POLICY,
   BSON_BUFFER_SIZE: parseIntSafe(process.env.BSON_BUFFER_SIZE),
 }
+
+console.log("Starting: Env:\n"+JSON.stringify(environment));
 
 export function setEnv(newEnvVars: Partial<typeof environment>): () => void {
   const oldEnv = cloneDeep(environment)
