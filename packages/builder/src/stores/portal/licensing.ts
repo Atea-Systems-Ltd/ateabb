@@ -339,7 +339,6 @@ class LicensingStore extends BudiStore<LicensingState> {
       userLimitExceeded
 
     this.update(state => {
-      console.log("Licensing update() called. userLimit: " + userLimit)
       return {
         ...state,
         usageMetrics: { ...monthlyMetrics, ...staticMetrics },
