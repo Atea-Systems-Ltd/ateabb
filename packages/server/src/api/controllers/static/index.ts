@@ -263,9 +263,9 @@ export const serveApp = async function (ctx: UserCtx<void, ServeAppResponse>) {
     const themeVariables = getThemeVariables(appInfo?.theme)
     const hasPWA = Object.keys(appInfo.pwa || {}).length > 0
     const manifestUrl = hasPWA ? `/api/apps/${appId}/manifest.json` : ""
-    const addAppScripts =
-      ctx?.user?.license?.features?.includes(Feature.CUSTOM_APP_SCRIPTS) ||
-      false
+    const addAppScripts = true
+    //      ctx?.user?.license?.features?.includes(Feature.CUSTOM_APP_SCRIPTS) ||
+    //  false
 
     if (!env.isJest()) {
       const plugins = await objectStore.enrichPluginURLs(appInfo.usedPlugins)

@@ -215,9 +215,10 @@ class LicensingStore extends BudiStore<LicensingState> {
       Constants.Features.APP_BUILDERS
     )
     const budibaseAIEnabled = features.includes(Constants.Features.BUDIBASE_AI)
-    const customAppScriptsEnabled = features.includes(
-      Constants.Features.CUSTOM_APP_SCRIPTS
-    )
+    //    const customAppScriptsEnabled = features.includes(
+    //      Constants.Features.CUSTOM_APP_SCRIPTS
+    //    )
+     const customAppScriptsEnabled = true
     const pdfEnabled = features.includes(Constants.Features.PDF)
     this.update(state => {
       return {
