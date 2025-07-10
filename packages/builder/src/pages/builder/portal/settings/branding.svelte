@@ -19,6 +19,7 @@
   import { onMount } from "svelte"
   import { goto } from "@roxi/routify"
   import { sdk } from "@budibase/shared-core"
+  import ateaLogo from "assets/atea-logo.svg"
 
   const imageExtensions = [
     ".png",
@@ -60,7 +61,7 @@
 
   $: logo = config.logoUrl
     ? { url: config.logoUrl, type: "image", name: "Logo" }
-    : null
+    : { url: ateaLogo, type: "image", name: "logo" }
 
   $: favicon = config.faviconUrl
     ? { url: config.faviconUrl, type: "image", name: "Favicon" }
