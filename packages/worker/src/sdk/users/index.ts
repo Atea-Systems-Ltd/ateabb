@@ -13,8 +13,8 @@ import * as pro from "@budibase/pro"
 //  })
 //)
 console.log("*********************************************")
-// Change the number of users to 500
-pro.constants.licenses.SELF_FREE_LICENSE.quotas.usage.static.users.value = 500;
+pro.constants.licenses.SELF_FREE_LICENSE.quotas.usage.static.users.value = -1;
+pro.constants.licenses.SELF_FREE_LICENSE.quotas.usage.static.userGroups.value = -1;
 users.UserDB.init(pro.quotas, pro.groups, pro.features)
 export const db = users.UserDB
 export { users as core } from "@budibase/backend-core"
