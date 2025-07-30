@@ -1,7 +1,10 @@
+import { UserRoles } from './../../../../../types/src/documents/global/user';
 import { generateGlobalUserID } from "../../../db"
+import { getAllApps } from "../../../db"
 import { authError } from "../utils"
 import * as users from "../../../users"
 import * as context from "../../../context"
+import { logWarn } from "../../../logging"
 import {
   SaveSSOUserFunction,
   SSOAuthDetails,
@@ -32,6 +35,30 @@ export async function authenticate(
   }
   if (!details.email) {
     return authError(done, "sso user email required")
+  }
+  let ateaUserRoles: UserRoles = {}
+  let allApps = await getAllApps()
+  const APP_MAP_RAW: string = process.env.ATEA_APP_MAP || '' 
+  const APP_MAP_ROLES: string[] = APP_MAP_RAW.split(",")
+  const CUSTOM_CLAIM: string = details?.profile?._json?.custom_claim || ''
+  if (CUSTOM_CLAIM) {
+    let roles: string[] = CUSTOM_CLAIM.split(",")
+    if (roles) {
+      roles.forEach((element: string) => {
+        APP_MAP_ROLES.forEach((role: string) => {
+          let rolemap: string[] = role.split(":")
+          if (rolemap[0] === element) {
+            for (let app of allApps) {
+              if (app.name === rolemap[2]) {
+                logWarn(`SETTING ROLE: APPID: ${app.appId}, ROLEMAP: ${rolemap}`)
+                const APPID: string = app.appId.replace('_dev', '')
+                ateaUserRoles[APPID] = rolemap[1]
+              }
+            }
+          }
+        })
+    });
+    }
   }
 
   // use the third party id
@@ -76,7 +103,8 @@ export async function authenticate(
       tenantId: context.getTenantId(),
     }
   }
-
+  // @ts-ignore
+  dbUser.roles = ateaUserRoles
   let ssoUser = await syncUser(dbUser, details)
   // never prompt for password reset
   ssoUser.forceResetPassword = false
@@ -136,3 +164,4 @@ async function syncUser(user: User, details: SSOAuthDetails): Promise<SSOUser> {
     oauth2,
   }
 }
+

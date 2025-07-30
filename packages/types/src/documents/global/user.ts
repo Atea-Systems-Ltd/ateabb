@@ -6,6 +6,7 @@ import { ContextUser } from "../../sdk"
 export interface SSOProfileJson {
   email?: string
   picture?: string
+  custom_claim?: string
 }
 
 export interface OAuth2 {
@@ -139,3 +140,4 @@ export interface AdminOnlyUser extends User {
 export function isUser(user: object): user is User {
   return !!(user as User).roles
 }
+
