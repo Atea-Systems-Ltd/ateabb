@@ -314,7 +314,8 @@ export async function save(
   // Ignore branding changes if the license does not permit it
   // Favicon and Logo Url are excluded.
   try {
-    const brandingEnabled = await pro.features.isBrandingEnabled()
+  //    const brandingEnabled = await pro.features.isBrandingEnabled()
+    const brandingEnabled = true
     if (existingConfig?.config && !brandingEnabled) {
       const {
         emailBrandingEnabled,
@@ -344,6 +345,7 @@ export async function save(
   }
 
   try {
+  console.log(" *** Attempting to save branding config ***")
     body._id = configs.generateConfigID(type)
     const response = await configs.save(body)
     await cache.bustCache(cache.CacheKey.CHECKLIST)
