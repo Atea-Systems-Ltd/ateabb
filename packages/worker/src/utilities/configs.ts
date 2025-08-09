@@ -5,14 +5,16 @@ export async function getLicensedConfig() {
   const defaults = {
     emailBrandingEnabled: true,
     testimonialsEnabled: true,
-    platformTitle: undefined,
+    platformTitle: "Ātea platform title",
     metaDescription: undefined,
-    loginHeading: undefined,
+    loginHeading: "Ātea login heading",
     loginButton: undefined,
     metaImageUrl: undefined,
-    metaTitle: undefined,
+    metaTitle: "Ātea meta title",
   }
 
+  licensedConfig = { ...defaults }
+/*
   try {
     // License/Feature Checks
     const enabled = await pro.features.isBrandingEnabled()
@@ -23,5 +25,6 @@ export async function getLicensedConfig() {
     licensedConfig = { ...defaults }
     console.info("Could not retrieve license", e)
   }
+*/
   return licensedConfig
 }
