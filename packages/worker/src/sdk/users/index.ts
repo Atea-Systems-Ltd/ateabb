@@ -13,11 +13,11 @@ import * as pro from "@budibase/pro"
 //  })
 //)
 console.log("*********************************************")
-pro.constants.licenses.SELF_FREE_LICENSE.quotas.usage.static.users.value = 200
+pro.constants.licenses.SELF_FREE_LICENSE.quotas.usage.static.users.value = -1
 //pro.constants.licenses.SELF_FREE_LICENSE.quotas.usage.static.userGroups.value = -1
 // Feature enum defined in ./packages/types/src/sdk/licensing/feature.ts
 //pro.constants.licenses.SELF_FREE_LICENSE.features = [ "environmentVariables", "userGroups", "branding","pwa","appBackups", "offline", "pdf" ]
-pro.constants.licenses.SELF_FREE_LICENSE.features = [ "branding" ]
+pro.constants.licenses.SELF_FREE_LICENSE.features = [ "branding", "environmentVariables", "offline" ]
 // PlanType enum defined in  ./packages/types/src/sdk/licensing/plan.ts
 pro.constants.licenses.SELF_FREE_LICENSE.plan.type = "enterprise"
 users.UserDB.init(pro.quotas, pro.groups, pro.features)
