@@ -81,7 +81,7 @@ class LicensingStore extends BudiStore<LicensingState> {
       brandingEnabled: true,
       pwaEnabled: false,
       scimEnabled: false,
-      environmentVariablesEnabled: false,
+      environmentVariablesEnabled: true,
       budibaseAIEnabled: false,
       customAIConfigsEnabled: false,
       auditLogsEnabled: false,
@@ -195,23 +195,28 @@ class LicensingStore extends BudiStore<LicensingState> {
     const isBusinessPlan = planType === Constants.PlanType.BUSINESS
     const isEnterpriseTrial =
       planType === Constants.PlanType.ENTERPRISE_BASIC_TRIAL
-    const groupsEnabled = features.includes(Constants.Features.USER_GROUPS)
+    // const groupsEnabled = features.includes(Constants.Features.USER_GROUPS)
+    const groupsEnabled = true
     const backupsEnabled = features.includes(Constants.Features.APP_BACKUPS)
     const scimEnabled = features.includes(Constants.Features.SCIM)
-    const environmentVariablesEnabled = features.includes(
-      Constants.Features.ENVIRONMENT_VARIABLES
-    )
+    //    const environmentVariablesEnabled = features.includes(
+    //  Constants.Features.ENVIRONMENT_VARIABLES
+    //)
+    const environmentVariablesEnabled = true
     const enforceableSSO = features.includes(Constants.Features.ENFORCEABLE_SSO)
     //    const brandingEnabled = features.includes(Constants.Features.BRANDING)
     const brandingEnabled = true
-    const pwaEnabled = features.includes(Constants.Features.PWA)
+    // const pwaEnabled = features.includes(Constants.Features.PWA)
+    const pwaEnabled = true
     const auditLogsEnabled = features.includes(Constants.Features.AUDIT_LOGS)
-    const syncAutomationsEnabled = features.includes(
-      Constants.Features.SYNC_AUTOMATIONS
-    )
-    const triggerAutomationRunEnabled = features.includes(
-      Constants.Features.TRIGGER_AUTOMATION_RUN
-    )
+    //const syncAutomationsEnabled = features.includes(
+    //  Constants.Features.SYNC_AUTOMATIONS
+    //)
+    const syncAutomationsEnabled = true
+    //const triggerAutomationRunEnabled = features.includes(
+    //  Constants.Features.TRIGGER_AUTOMATION_RUN
+    // )
+    const triggerAutomationRunEnabled = true
     const perAppBuildersEnabled = features.includes(
       Constants.Features.APP_BUILDERS
     )
@@ -220,7 +225,8 @@ class LicensingStore extends BudiStore<LicensingState> {
     //      Constants.Features.CUSTOM_APP_SCRIPTS
     //    )
      const customAppScriptsEnabled = true
-    const pdfEnabled = features.includes(Constants.Features.PDF)
+     // const pdfEnabled = features.includes(Constants.Features.PDF)
+    const pdfEnabled = true
     this.update(state => {
       return {
         ...state,
