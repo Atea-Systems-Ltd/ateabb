@@ -20,7 +20,6 @@ pro.constants.licenses.SELF_FREE_LICENSE.quotas.usage.static.users.value = -1
 //pro.constants.licenses.SELF_FREE_LICENSE.features = [ "environmentVariables", "userGroups", "branding","pwa","appBackups", "offline", "pdf" ]
 //pro.constants.licenses.SELF_FREE_LICENSE.features = [ "branding", "environmentVariables", "offline" ]
 pro.constants.licenses.SELF_FREE_LICENSE.features = [
-=======
   Feature.BRANDING,
   Feature.ENVIRONMENT_VARIABLES,
   Feature.OFFLINE,
@@ -29,13 +28,6 @@ pro.constants.licenses.SELF_FREE_LICENSE.features = [
   Feature.USER_GROUPS,
   Feature.PWA,
   Feature.PDF,
-  // "environmentVariables",
-  // "offline",
-  // "syncAutomations",
-  // "triggerAutomationRun",
-  // "userGroups",
-  // "pwa",
-  // "pdf",
 ]
 // PlanType enum defined in  ./packages/types/src/sdk/licensing/plan.ts
 pro.constants.licenses.SELF_FREE_LICENSE.plan.type = PlanType.ENTERPRISE
