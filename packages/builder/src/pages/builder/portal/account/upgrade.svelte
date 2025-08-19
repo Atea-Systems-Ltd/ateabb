@@ -134,17 +134,17 @@
     }
   }
 
-  async function deleteOfflineLicense() {
-    try {
-      await API.deleteOfflineLicense()
-      await auth.getSelf()
-      await getOfflineLicense()
-      notifications.success("Successfully removed ofline license")
-    } catch (e) {
-      console.error(e)
-      notifications.error("Error upload offline license")
-    }
-  }
+  // async function deleteOfflineLicense() {
+  //   try {
+  //     await API.deleteOfflineLicense()
+  //     await auth.getSelf()
+  //     await getOfflineLicense()
+  //     notifications.success("Successfully removed ofline license")
+  //   } catch (e) {
+  //     console.error(e)
+  //     notifications.error("Error upload offline license")
+  //   }
+  // }
 
   async function onOfflineLicenseChange(event) {
     if (event.detail) {
@@ -156,9 +156,10 @@
       const reader = new FileReader()
       reader.readAsText(event.detail)
       reader.onload = () => activateOfflineLicense(reader.result)
-    } else {
-      offlineLicense = undefined
-      await deleteOfflineLicense()
+      // } else {
+      // never delete the offline license
+      //   offlineLicense = undefined
+      //   await deleteOfflineLicense()
     }
   }
 
@@ -227,7 +228,7 @@
             extensions={offlineLicenseExtensions}
             value={offlineLicense}
             on:change={onOfflineLicenseChange}
-            allowClear={true}
+            allowClear={false}
             disabled={!!offlineLicense}
           />
         </div>
