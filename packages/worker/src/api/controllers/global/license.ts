@@ -1,4 +1,4 @@
-import { licensing, quotas } from "@budibase/pro"
+import { quotas } from "@budibase/pro"
 import {
   ActivateLicenseKeyRequest,
   ActivateLicenseKeyResponse,
@@ -17,24 +17,24 @@ import {
 export async function activateLicenseKey(
   ctx: UserCtx<ActivateLicenseKeyRequest, ActivateLicenseKeyResponse>
 ) {
-  const { licenseKey } = ctx.request.body
-  await licensing.keys.activateLicenseKey(licenseKey)
+  // const { licenseKey } = ctx.request.body
+  // await licensing.keys.activateLicenseKey(licenseKey)
   ctx.body = {
     message: "License activated.",
   }
 }
 
 export async function getLicenseKey(ctx: UserCtx<void, GetLicenseKeyResponse>) {
-  const licenseKey = await licensing.keys.getLicenseKey()
-  if (licenseKey) {
-    ctx.body = { licenseKey: "*" }
-  } else {
-    ctx.status = 404
-  }
+  // const licenseKey = await licensing.keys.getLicenseKey()
+  // if (licenseKey) {
+  ctx.body = { licenseKey: "*" }
+  // } else {
+  //   ctx.status = 404
+  // }
 }
 
 export async function deleteLicenseKey(ctx: UserCtx<void, void>) {
-  await licensing.keys.deleteLicenseKey()
+  // await licensing.keys.deleteLicenseKey()
   ctx.status = 204
 }
 
@@ -46,8 +46,8 @@ export async function activateOfflineLicenseToken(
     ActivateOfflineLicenseTokenResponse
   >
 ) {
-  const { offlineLicenseToken } = ctx.request.body
-  await licensing.offline.activateOfflineLicenseToken(offlineLicenseToken)
+  // const { offlineLicenseToken } = ctx.request.body
+  // await licensing.offline.activateOfflineLicenseToken(offlineLicenseToken)
   ctx.body = {
     message: "License token activated.",
   }
@@ -56,23 +56,24 @@ export async function activateOfflineLicenseToken(
 export async function getOfflineLicenseToken(
   ctx: UserCtx<void, GetOfflineLicenseTokenResponse>
 ) {
-  const offlineLicenseToken = await licensing.offline.getOfflineLicenseToken()
-  if (offlineLicenseToken) {
-    ctx.body = { offlineLicenseToken: "*" }
-  } else {
-    ctx.status = 404
-  }
+  // const offlineLicenseToken = await licensing.offline.getOfflineLicenseToken()
+  // if (offlineLicenseToken) {
+  ctx.body = { offlineLicenseToken: "*" }
+  // } else {
+  //   ctx.status = 404
+  // }
 }
 
 export async function deleteOfflineLicenseToken(ctx: UserCtx<void, void>) {
-  await licensing.offline.deleteOfflineLicenseToken()
+  // await licensing.offline.deleteOfflineLicenseToken()
   ctx.status = 204
 }
 
 export async function getOfflineLicenseIdentifier(
   ctx: UserCtx<void, GetOfflineIdentifierResponse>
 ) {
-  const identifierBase64 = await licensing.offline.getIdentifierBase64()
+  // const identifierBase64 = await licensing.offline.getIdentifierBase64()
+  const identifierBase64 = "Ātea BB offline license identifier"
   ctx.body = { identifierBase64 }
 }
 
@@ -81,7 +82,7 @@ export async function getOfflineLicenseIdentifier(
 export const refresh = async (
   ctx: UserCtx<void, RefreshOfflineLicenseResponse>
 ) => {
-  await licensing.cache.refresh()
+  // await licensing.cache.refresh()
   ctx.body = {
     message: "License refreshed.",
   }
