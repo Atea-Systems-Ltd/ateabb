@@ -1,30 +1,28 @@
 import env from "../../environment"
-import { logger } from "./logger"
 import { IncomingMessage } from "http"
-
-const pino = require("koa-pino-logger")
-
-import { Options } from "pino-http"
+import type { Options } from "pino-http"
 import { Ctx } from "@budibase/types"
 
+const pino = require("koa-pino-logger")
 const correlator = require("correlation-id")
 
 export function pinoSettings(): Options {
+  // Intentionally NOT passing a custom `logger` to avoid type collisions.
   return {
-    logger,
     genReqId: correlator.getId,
     autoLogging: {
       ignore: (req: IncomingMessage) => !!req.url?.includes("/health"),
     },
     serializers: {
-      req: req => {
+      req: (req: any) => {
         return {
           method: req.method,
           url: req.url,
+          // `id` is attached by pino-http at runtime
           correlationId: req.id,
         }
       },
-      res: res => {
+      res: (res: any) => {
         return {
           status: res.statusCode,
         }
@@ -46,3 +44,4 @@ function getMiddleware() {
 const pinoMiddleware = getMiddleware()
 
 export default pinoMiddleware
+
