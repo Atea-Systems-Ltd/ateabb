@@ -69,14 +69,13 @@
 
 <svelte:window on:keydown={handleKeydown} />
 {#if loaded}
-  <TestimonialPage enabled={$organisation.testimonialsEnabled}>
     <Layout gap="L" noPadding>
       <Layout justifyItems="center" noPadding>
         {#if loaded}
-          <img alt="logo" src={$organisation.logoUrl || Logo} />
+          <img alt="logo" src="https://www.ateasystems.com/_nuxt/img/a3fe173.svg" />
         {/if}
         <Heading size="M">
-          {$organisation.loginHeading || "Log in to Budibase"}
+          {"Log in to Ātea Systems"}
         </Heading>
       </Layout>
       <Layout gap="S" noPadding>
@@ -166,7 +165,6 @@
         </Body>
       {/if}
     </Layout>
-  </TestimonialPage>
 {/if}
 
 <style>
