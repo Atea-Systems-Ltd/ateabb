@@ -31,8 +31,7 @@ build-airgapped:
 	systemctl start firewalld
 	systemctl restart docker
 	yarn build:docker:airgap
-	mv bb-airgapped.tar.gz "${ATEABB_HOME}" && cd "${ATEABB_HOME}"
-	rm -rf hosting/scripts/bb-airgapped
+	mv bb-airgapped.tar.gz "${ATEABB_HOME}" && cd "${ATEABB_HOME}" && rm -rf hosting/scripts/bb-airgapped
 	tar -xf bb-airgapped.tar.gz
 	cd hosting/scripts/bb-airgapped
 	sed -i '/LOG_LEVEL: trace/a\      ATEA_APP_MAP: "ATEA_FTR_USER:BASIC:ftr,ATEA_FTR_POWER:POWER:ftr,ATEA_FTR_ADMIN:ADMIN:ftr"' docker-compose.yaml
