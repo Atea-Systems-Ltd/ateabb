@@ -1,4 +1,5 @@
 ATEABB_HOME=/opt/ateabb
+BB_DIR=${ATEABB_HOME}/hosting/scripts/bb-airgapped
 
 rebuild:
 	systemctl stop ateabb
@@ -30,29 +31,24 @@ build-airgapped:
 	docker tag budibase/couchdb:v3.3.3-sqs-v2.1.1 ibmcom/couchdb3
 	systemctl start firewalld
 	systemctl restart docker
+	mkdir -p "${BB_DIR}"
 	yarn build:docker:airgap
-	mv bb-airgapped.tar.gz "${ATEABB_HOME}" && cd "${ATEABB_HOME}" && rm -rf hosting/scripts/bb-airgapped
-	tar -xf bb-airgapped.tar.gz
-	cd hosting/scripts/bb-airgapped
-	sed -i '/LOG_LEVEL: trace/a\      ATEA_APP_MAP: "ATEA_FTR_USER:BASIC:ftr,ATEA_FTR_POWER:POWER:ftr,ATEA_FTR_ADMIN:ADMIN:ftr"' docker-compose.yaml
-	sed -i '/image:/a\    pull_policy: never' docker-compose.yaml
-	sed -i 's|.*budibase/couchdb.*|    image: ibmcom/couchdb3|g' docker-compose.yaml
-	sed -i 's/BB_ADMIN_USER_EMAIL=/BB_ADMIN_USER_EMAIL=support@ateasystems.com/g' .env
-	sed -i 's/BB_ADMIN_USER_PASSWORD=/BB_ADMIN_USER_PASSWORD=4734_Systems/g' .env
-	sed -i 's/REDIS_PORT=6379/REDIS_PORT=6380/g' .env
-	cat >> .env <<EOF
-	ENCRYPTION_KEY=4734_Systems
-	SELF_HOSTED=1
-	DISABLE_ACCOUNT_PORTAL=1
-	OFFLINE_MODE=1
-	ACCOUNT_PORTAL_URL=
-	BUDICLOUD_URL=
-	DEFAULT_LICENSE=""
-	EOF
+	mv bb-airgapped.tar.gz "${ATEABB_HOME}"
+	rm -rf "${ATEABB_HOME}/hosting"
+	cd "${ATEABB_HOME}" && tar -xf bb-airgapped.tar.gz
+	cd "${BB_DIR}" && sed -i '/LOG_LEVEL: trace/a\      ATEA_APP_MAP: "ATEA_FTR_USER:BASIC:ftr,ATEA_FTR_POWER:POWER:ftr,ATEA_FTR_ADMIN:ADMIN:ftr"' docker-compose.yaml 
+	cd "${BB_DIR}" && sed -i '/image:/a\    pull_policy: never' docker-compose.yaml
+	cd "${BB_DIR}" && sed -i 's|.*budibase/couchdb.*|    image: ibmcom/couchdb3|g' docker-compose.yaml
+	cd "${BB_DIR}" && sed -i 's/BB_ADMIN_USER_EMAIL=/BB_ADMIN_USER_EMAIL=support@ateasystems.com/g' .env
+	cd "${BB_DIR}" && sed -i 's/BB_ADMIN_USER_PASSWORD=/BB_ADMIN_USER_PASSWORD=4734_Systems/g' .env
+	cd "${BB_DIR}" && sed -i 's/REDIS_PORT=6379/REDIS_PORT=6380/g' .env
+	cd "${BB_DIR}" && echo "ENCRYPTION_KEY=4734_Systems" >> .env
+	cd "${BB_DIR}" && echo "SELF_HOSTED=1 >> .env
+	cd "${BB_DIR}" && echo "DISABLE_ACCOUNT_PORTAL=1 >> .env
+	cd "${BB_DIR}" && echo "OFFLINE_MODE=1 >> .env
+	cd "${BB_DIR}" && echo "ACCOUNT_PORTAL_URL= >> .env
+	cd "${BB_DIR}" && echo "BUDICLOUD_URL= >> .env
+	cd "${BB_DIR}" && echo "DEFAULT_LICENSE= >> .env
 	systemctl restart docker
-	for e in *.tar; do docker load -i $e ; done
-
-
-
-
+	cd "${ATEABB_HOME}/hosting/scripts/bb-airgapped" && for e in *.tar; do docker load -i "$e" ; done
 
