@@ -27,6 +27,7 @@ export async function authenticate(
   done: any,
   saveUserFn: SaveSSOUserFunction
 ) {
+  console.log('entering authenticate')
   if (!saveUserFn) {
     throw new Error("Save user function must be provided")
   }
@@ -37,10 +38,15 @@ export async function authenticate(
     return authError(done, "sso user email required")
   }
   let ateaUserRoles: UserRoles = {}
+  console.log('getting allApps')
   let allApps = await getAllApps()
+  console.log('got allApps', JSON.stringify(allApps))
+  logWarn(`allApps: ${JSON.stringify(allApps)}`)
   const APP_MAP_RAW: string = process.env.ATEA_APP_MAP || '' 
   const APP_MAP_ROLES: string[] = APP_MAP_RAW.split(",")
+  logWarn(`APP_MAP_ROLES: ${APP_MAP_ROLES}`)
   const CUSTOM_CLAIM: string = details?.profile?._json?.custom_claim || ''
+  logWarn(`CUSTOM_CLAIM: ${CUSTOM_CLAIM}`)
   if (CUSTOM_CLAIM) {
     let roles: string[] = CUSTOM_CLAIM.split(",")
     if (roles) {
