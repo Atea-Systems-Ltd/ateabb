@@ -97,19 +97,22 @@
   // OFFLINE LICENSE
 
   const getOfflineLicense = async () => {
-    try {
-      const license = await API.getOfflineLicense()
-      if (license) {
-        offlineLicense = {
-          name: "license",
-        }
-      } else {
-        offlineLicense = undefined
-      }
-    } catch (e) {
-      console.error(e)
-      notifications.error("Error loading offline license")
+    offlineLicense = {
+      name: "license",
     }
+    // try {
+    //   const license = await API.getOfflineLicense()
+    //   if (license) {
+    //     offlineLicense = {
+    //       name: "license",
+    //     }
+    //   } else {
+    //     offlineLicense = undefined
+    //   }
+    // } catch (e) {
+    //   console.error(e)
+    //   notifications.error("Error loading offline license")
+    // }
   }
 
   const getOfflineLicenseIdentifier = async () => {
@@ -164,14 +167,15 @@
   }
 
   const refresh = async () => {
-    try {
-      await API.refreshLicense()
-      await auth.getSelf()
-      notifications.success("Refreshed license")
-    } catch (err) {
-      console.error(err)
-      notifications.error("Error refreshing license")
-    }
+    notifications.warning("Call to refresh license has been blocked")
+    // try {
+    //   await API.refreshLicense()
+    //   await auth.getSelf()
+    //   notifications.success("Refreshed license")
+    // } catch (err) {
+    //   console.error(err)
+    //   notifications.error("Error refreshing license")
+    // }
   }
 
   onMount(async () => {
