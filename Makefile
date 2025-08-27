@@ -43,12 +43,12 @@ build-airgapped:
 	cd "${BB_DIR}" && sed -i 's/BB_ADMIN_USER_PASSWORD=/BB_ADMIN_USER_PASSWORD=4734_Systems/g' .env
 	cd "${BB_DIR}" && sed -i 's/REDIS_PORT=6379/REDIS_PORT=6380/g' .env
 	cd "${BB_DIR}" && echo "ENCRYPTION_KEY=4734_Systems" >> .env
-	cd "${BB_DIR}" && echo "SELF_HOSTED=1 >> .env
-	cd "${BB_DIR}" && echo "DISABLE_ACCOUNT_PORTAL=1 >> .env
-	cd "${BB_DIR}" && echo "OFFLINE_MODE=1 >> .env
-	cd "${BB_DIR}" && echo "ACCOUNT_PORTAL_URL= >> .env
-	cd "${BB_DIR}" && echo "BUDICLOUD_URL= >> .env
-	cd "${BB_DIR}" && echo "DEFAULT_LICENSE= >> .env
+	cd "${BB_DIR}" && echo "SELF_HOSTED=1" >> .env
+	cd "${BB_DIR}" && echo "DISABLE_ACCOUNT_PORTAL=1" >> .env
+	cd "${BB_DIR}" && echo "OFFLINE_MODE=1" >> .env
+	cd "${BB_DIR}" && echo "ACCOUNT_PORTAL_URL=" >> .env
+	cd "${BB_DIR}" && echo "BUDICLOUD_URL=" >> .env
+	cd "${BB_DIR}" && echo "DEFAULT_LICENSE=" >> .env
 	systemctl restart docker
 	cd "${ATEABB_HOME}/hosting/scripts/bb-airgapped" && for e in *.tar; do docker load -i "$e" ; done
 
