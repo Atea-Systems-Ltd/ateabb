@@ -50,5 +50,4 @@ build-airgapped:
 	cd "${BB_DIR}" && echo "BUDICLOUD_URL=" >> .env
 	cd "${BB_DIR}" && echo "DEFAULT_LICENSE=" >> .env
 	systemctl restart docker
-	cd "${ATEABB_HOME}/hosting/scripts/bb-airgapped" && for e in *.tar; do docker load -i "$e" ; done
-
+	cd "${BB_DIR}" && for e in ./*.tar; do [ -e "$$e" ] || continue; docker load -i "$$e"; done
