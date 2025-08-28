@@ -5,9 +5,9 @@ After=docker.service network.target
 
 [Service]
 Type=exec
-WorkingDirectory=/opt/budibase
-ExecStart=/usr/bin/docker compose --env-file hosting/hosting.properties -f hosting/docker-compose.dev.yaml -f hosting/docker-compose.build.yaml up --build --remove-orphans
-ExecStop=/usr/bin/docker compose -f hosting/docker-compose.dev.yaml -f hosting/docker-compose.build.yaml down
+WorkingDirectory=/opt/ateabb-live/hosting/scripts/bb-airgapped
+ExecStart=/usr/bin/docker compose up --build --remove-orphans
+ExecStop=/usr/bin/docker compose down
 Restart=on-failure
 RestartSec=10
 TimeoutStartSec=0
