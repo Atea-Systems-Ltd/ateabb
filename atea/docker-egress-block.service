@@ -1,0 +1,16 @@
+[Unit]
+Description=Apply Docker egress rules (private-only) before Docker
+Before=docker.service
+After=firewalld.service
+Requires=firewalld.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/docker-private-egress.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+
+
+
