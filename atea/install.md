@@ -26,6 +26,9 @@ zip -r /tmp/ateabb.zip \
 	/opt/db-inserter \
 	/opt/sip-recorder \
 	/etc/atea/scripts/opidc-axl \
+    /etc/atea/properties/traefik/budibase.toml \
+    /etc/atea/properties/traefik/atea-mcr-helper.toml \
+    /etc/atea/properties/traefik/oidcaxl.toml \
 	/etc/default/oidc-axl.env \
 	/etc/systemd/system/ateabb.service \
 	/etc/systemd/system/iodcaxlcontroller.service \
