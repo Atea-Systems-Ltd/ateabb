@@ -17,7 +17,7 @@
   import OIDCButton from "./_components/OIDCButton.svelte"
   import { handleError } from "./_components/utils"
   // import Logo from "assets/bb-emblem.svg"
-  // import { TestimonialPage } from "@budibase/frontend-core/src/components"
+  import { TestimonialPage } from "@budibase/frontend-core/src/components"
   import { onMount } from "svelte"
   import { pushNumSessionsInvalidated } from "../../../../../frontend-core/src"
 
@@ -26,7 +26,7 @@
   let errors = {}
   let formData = {}
 
-  $: company = $organisation.company || "Budibase"
+  $: company = $organisation.company || ""
   $: cloud = $admin.cloud
 
   async function login() {
@@ -69,6 +69,7 @@
 
 <svelte:window on:keydown={handleKeydown} />
 {#if loaded}
+  <TestimonialPage enabled={$organisation.testimonialsEnabled}>
   <Layout gap="L" noPadding>
     <Layout justifyItems="center" noPadding>
       {#if loaded}
@@ -152,7 +153,6 @@
         </div>
       </Layout>
     {/if}
-
     {#if cloud}
       <Body size="xs" textAlign="center">
         By using Budibase Cloud
@@ -164,6 +164,7 @@
       </Body>
     {/if}
   </Layout>
+  </TestimonialPage>
 {/if}
 
 <style>

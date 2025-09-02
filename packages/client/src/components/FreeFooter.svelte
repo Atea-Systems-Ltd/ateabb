@@ -4,7 +4,7 @@
 
 <div class="free-footer">
   <Link
-    href="https://www.budibase.com/?utm_source=budibase-apps-public-screens&utm_medium=badge&utm_campaign=made-in-budibase"
+    href="https://www.ateasystems.com"
     target="_blank"
   >
     Copyright: <span>Ātea Systems Ltd</span>
