@@ -46,7 +46,7 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<TestimonialPage enabled={$organisation.testimonialsEnabled}>
+<TestimonialPage enabled="false">
   <Layout gap="S" noPadding>
     <img alt="logo" src={$organisation.logoUrl || Logo} />
     <span class="heading-wrap">

@@ -70,7 +70,7 @@
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
-<TestimonialPage enabled={$organisation.testimonialsEnabled}>
+<TestimonialPage false>
   <Layout gap="S" noPadding>
     {#if loaded}
       <img alt="logo" src={$organisation.logoUrl || Logo} />

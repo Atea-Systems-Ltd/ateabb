@@ -21,8 +21,8 @@
   let onboarding = false
   let errors = {}
   let loaded = false
-
-  $: company = $organisation.company || "Budibase"
+  const ateaSystems = "Ātea Systems"
+  $: company = ateaSystems
   $: passwordMinLength = $admin.passwordMinLength ?? 12
 
   async function acceptInvite() {

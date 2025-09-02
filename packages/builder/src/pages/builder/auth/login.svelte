@@ -25,8 +25,9 @@
   let form
   let errors = {}
   let formData = {}
+  const ateaSystems = "Ātea Systems"
 
-  $: company = $organisation.company || "Budibase"
+  // $: company = ateaSystems
   $: cloud = $admin.cloud
 
   async function login() {
@@ -141,7 +142,7 @@
           disabled={Object.keys(errors).length > 0}
           on:click={login}
         >
-          {$organisation.loginButton || `Log in to ${company}`}
+          {`Log in to ${ateaSystems}`}
         </Button>
       </Layout>
       <Layout gap="XS" noPadding justifyItems="center">

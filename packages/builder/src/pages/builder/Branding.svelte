@@ -4,9 +4,11 @@
 
   let loaded = false
 
-  $: platformTitleText = $organisation.platformTitle
+  const ateaSystems = "Ātea Systems"
+
+  $: platformTitleText = ateaSystems
   $: platformTitle =
-    !$auth.user && platformTitleText ? platformTitleText : "Budibase"
+    !$auth.user && platformTitleText ? platformTitleText : ateaSystems
 
   $: faviconUrl = $organisation.faviconUrl || "/builder/bblogo.png"
 

@@ -15,6 +15,7 @@
   import { redirect } from "@roxi/routify"
   import { sdk } from "@budibase/shared-core"
 
+  const ateaSystems = "Ātea Systems"
   // Only admins allowed here
   $: {
     if (!sdk.users.isAdmin($auth.user)) {
@@ -24,7 +25,7 @@
 
   const values = writable({
     isSSOEnforced: $organisation.isSSOEnforced,
-    company: $organisation.company,
+    company: ateaSystems,
     platformUrl: $organisation.platformUrl,
     analyticsEnabled: $organisation.analyticsEnabled,
   })

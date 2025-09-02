@@ -42,6 +42,7 @@
   let loaded: boolean = false
   let userInfoModal: Modal
   let changePasswordModal: Modal
+  const ateaSystems = "Ātea Systems"
 
   $: userGroups = $groups.filter(group =>
     group.users?.find(user => user._id === $auth.user?._id)
@@ -153,8 +154,8 @@
               Hey {helpers.getUserLabel($auth.user)}
             </Heading>
             <Body>
-              Welcome to the {$organisation.company} portal. Below you'll find the
-              list of apps that you have access to.
+              Welcome to the {ateaSystems} portal. Below you'll find the list of
+              apps that you have access to.
             </Body>
           </Layout>
           <Divider />

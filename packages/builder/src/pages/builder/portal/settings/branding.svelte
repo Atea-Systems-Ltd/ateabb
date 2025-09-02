@@ -45,7 +45,7 @@
 
   let config = {}
   let updated = false
-
+  const ateaSystems = "Ātea Systems"
   $: onConfigUpdate(config)
   $: initialised = Object.keys(config).length > 0
 
@@ -190,12 +190,12 @@
     }
     config = {
       faviconUrl: $organisation.faviconUrl,
-      logoUrl: $organisation.logoUrl,
-      platformTitle: $organisation.platformTitle,
-      emailBrandingEnabled: $organisation.emailBrandingEnabled,
-      loginHeading: $organisation.loginHeading,
-      loginButton: $organisation.loginButton,
-      testimonialsEnabled: $organisation.testimonialsEnabled,
+      logoUrl: "https://www.ateasystems.com/_nuxt/img/a3fe173.svg",
+      platformTitle: ateaSystems,
+      emailBrandingEnabled: true,
+      loginHeading: "Welcome to " + ateaSystems,
+      loginButton: "Login",
+      testimonialsEnabled: false,
       metaDescription: $organisation.metaDescription,
       metaImageUrl: $organisation.metaImageUrl,
       metaTitle: $organisation.metaTitle,
