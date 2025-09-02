@@ -118,21 +118,21 @@
     const apiReady = $admin.loaded && $auth.loaded
 
     // firstly, set the return url
-    if (
-      loaded &&
-      apiReady &&
-      !$auth.user &&
-      !CookieUtils.getCookie(Constants.Cookies.ReturnUrl) &&
-      // logout triggers a page refresh, so we don't want to set the return url
-      !$auth.postLogout &&
-      // don't set the return url on pre-login pages
-      !$isActive("./auth") &&
-      !$isActive("./invite") &&
-      !$isActive("./admin")
-    ) {
-      const url = window.location.pathname
-      CookieUtils.setCookie(Constants.Cookies.ReturnUrl, url)
-    }
+    // if (
+    //   loaded &&
+    //   apiReady &&
+    //   !$auth.user &&
+    //   !CookieUtils.getCookie(Constants.Cookies.ReturnUrl) &&
+    //   // logout triggers a page refresh, so we don't want to set the return url
+    //   !$auth.postLogout &&
+    //   // don't set the return url on pre-login pages
+    //   !$isActive("./auth") &&
+    //   !$isActive("./invite") &&
+    //   !$isActive("./admin")
+    // ) {
+    //   const url = window.location.pathname
+    //   CookieUtils.setCookie(Constants.Cookies.ReturnUrl, url)
+    // }
 
     // if tenant is not set go to it
     if (

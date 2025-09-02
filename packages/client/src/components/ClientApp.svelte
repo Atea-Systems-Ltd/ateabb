@@ -4,8 +4,8 @@
   import { Layout, Heading, Body } from "@budibase/bbui"
   import ErrorSVG from "@budibase/frontend-core/assets/error.svg?raw"
   import {
-    Constants,
-    CookieUtils,
+    // Constants,
+    // CookieUtils,
     invalidationMessage,
     popNumSessionsInvalidated,
   } from "@budibase/frontend-core"
@@ -97,8 +97,8 @@
       } else {
         // If they have no screens and are not logged in, it probably means
         // they should log in to gain access
-        const returnUrl = `${window.location.pathname}${window.location.hash}`
-        CookieUtils.setCookie(Constants.Cookies.ReturnUrl, returnUrl)
+        // const returnUrl = `${window.location.pathname}${window.location.hash}`
+        // CookieUtils.setCookie(Constants.Cookies.ReturnUrl, returnUrl)
         window.location = "/builder/auth/login"
       }
     }
