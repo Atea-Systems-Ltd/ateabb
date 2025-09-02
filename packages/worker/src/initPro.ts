@@ -4,10 +4,25 @@ import * as pro from "@budibase/pro"
 import { Feature } from "@budibase/types"
 
 export const initPro = async () => {
-  pro.constants.licenses.SELF_FREE_LICENSE.quotas.usage.static.users.value = -1
-  pro.constants.licenses.SELF_FREE_LICENSE.features = [
-    Feature.BRANDING,
-    Feature.OFFLINE,
-  ]
+  // Initialise Pro SDK first — some init paths rebuild constants
   await proSdk.init({})
+
+  // Ensure both self-hosted and cloud free licenses reflect desired limits/features
+  const freeLicenses = [
+    pro.constants.licenses.SELF_FREE_LICENSE,
+    pro.constants.licenses.CLOUD_FREE_LICENSE,
+  ]
+
+  for (const license of freeLicenses) {
+    try {
+      // Unlimited users (and keep other quotas as-is)
+      if (license?.quotas?.usage?.static?.users) {
+        license.quotas.usage.static.users.value = -1
+      }
+      // Enable desired features explicitly
+      license.features = [Feature.BRANDING, Feature.OFFLINE]
+    } catch (err) {
+      // swallow to avoid boot failure if license shape changes
+    }
+  }
 }

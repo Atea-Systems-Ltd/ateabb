@@ -1,4 +1,4 @@
-import { quotas } from "@budibase/pro"
+import { quotas, licensing } from "@budibase/pro"
 import {
   ActivateLicenseKeyRequest,
   ActivateLicenseKeyResponse,
@@ -82,9 +82,13 @@ export async function getOfflineLicenseIdentifier(
 export const refresh = async (
   ctx: UserCtx<void, RefreshOfflineLicenseResponse>
 ) => {
-  // await licensing.cache.refresh()
-  ctx.body = {
-    message: "License refreshed.",
+  try {
+    // Refresh any cached license so updated constants take effect
+    await licensing.cache.refresh()
+    ctx.body = { message: "License refreshed." }
+  } catch (err) {
+    // Fall back to a 200 with message to avoid breaking UI flows
+    ctx.body = { message: "License refresh attempted." }
   }
 }
 
