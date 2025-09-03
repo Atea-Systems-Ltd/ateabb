@@ -6,8 +6,10 @@ services:
   app-service:
     restart: unless-stopped
     image: budibase/apps
+    pull_policy: never
     container_name: bbapps
     environment:
+      TZ: ${TZ}
       SELF_HOSTED: 1
       COUCH_DB_URL: http://${COUCH_DB_USER}:${COUCH_DB_PASSWORD}@couchdb-service:5984
       WORKER_URL: http://worker-service:4003
@@ -37,8 +39,10 @@ services:
   worker-service:
     restart: unless-stopped
     image: budibase/worker
+    pull_policy: never
     container_name: bbworker
     environment:
+      TZ: ${TZ}
       SELF_HOSTED: 1
       PORT: 4003
       CLUSTER_PORT: ${MAIN_PORT}
@@ -57,6 +61,7 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
       OFFLINE_MODE: ${OFFLINE_MODE:-}
       LOG_LEVEL: trace
+      ATEA_APP_MAP: "ATEA_FTR_USER:BASIC:ftr,ATEA_FTR_POWER:POWER:ftr,ATEA_FTR_ADMIN:ADMIN:ftr"
     depends_on:
       - redis-service
       - minio-service
@@ -64,9 +69,11 @@ services:
   minio-service:
     restart: unless-stopped
     image: minio/minio
+    pull_policy: never
     volumes:
       - minio_data:/data
     environment:
+      TZ: ${TZ}
       MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
       MINIO_BROWSER: "off"
@@ -83,7 +90,9 @@ services:
       - "${MAIN_PORT}:10000"
     container_name: bbproxy
     image: budibase/proxy
+    pull_policy: never
     environment:
+      - TZ=${TZ}
       - PROXY_RATE_LIMIT_WEBHOOKS_PER_SECOND=10
       - PROXY_RATE_LIMIT_API_PER_SECOND=20
       - APPS_UPSTREAM_URL=http://app-service:4002
@@ -99,8 +108,10 @@ services:
 
   couchdb-service:
     restart: unless-stopped
-    image: budibase/couchdb:v3.3.3-sqs-v2.1.1
+    image: ibmcom/couchdb3
+    pull_policy: never
     environment:
+      - TZ=${TZ}
       - COUCHDB_PASSWORD=${COUCH_DB_PASSWORD}
       - COUCHDB_USER=${COUCH_DB_USER}
       - TARGETBUILD=docker-compose
@@ -110,6 +121,7 @@ services:
   redis-service:
     restart: unless-stopped
     image: redis
+    pull_policy: never
     command: redis-server --requirepass "${REDIS_PASSWORD}"
     volumes:
       - redis_data:/data

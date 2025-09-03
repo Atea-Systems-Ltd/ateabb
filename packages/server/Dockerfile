@@ -46,7 +46,7 @@ RUN --mount=type=cache,target=/root/.yarn/${TARGETPLATFORM} YARN_CACHE_FOLDER=/r
     && yarn cache clean \
     && apk del g++ make python3 jq \
     && rm -rf /tmp/* /root/.node-gyp /usr/local/lib/node_modules/npm/node_modules/node-gyp
-
+RUN apk add --no-cache tzdata
 COPY packages/server/dist/ dist/
 COPY packages/server/docker_run.sh .
 COPY packages/server/builder/ builder/

@@ -29,7 +29,7 @@ RUN --mount=type=cache,target=/root/.yarn/${TARGETPLATFORM} YARN_CACHE_FOLDER=/r
 # Remove unneeded data from file system to reduce image size
 RUN apk del .gyp \
     && yarn cache clean
-
+RUN apk add --no-cache tzdata
 COPY packages/worker/dist/ dist/
 COPY packages/worker/docker_run.sh .
 COPY packages/server/pm2.config.js .
