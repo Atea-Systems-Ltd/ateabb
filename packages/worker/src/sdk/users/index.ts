@@ -1,6 +1,26 @@
 export * from "./users"
 import { users } from "@budibase/backend-core"
 import * as pro from "@budibase/pro"
+
+// Ensure free-plan user limits are overridden before UserDB.init runs
+try {
+  const licenses: any[] = [
+    // self-hosted free license
+    // @ts-ignore
+    pro?.constants?.licenses?.SELF_FREE_LICENSE,
+    // cloud free license (safe to update if present)
+    // @ts-ignore
+    pro?.constants?.licenses?.CLOUD_FREE_LICENSE,
+  ].filter(Boolean)
+
+  for (const lic of licenses) {
+    if (lic?.quotas?.usage?.static?.users) {
+      lic.quotas.usage.static.users.value = -1
+    }
+  }
+} catch (err) {
+  // non-fatal: if structure changes, continue with defaults
+}
 // pass in the components which are specific to the worker/the parts of pro which backend-core cannot access
 //
 //console.log("*********************************************")

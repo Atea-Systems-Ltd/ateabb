@@ -60,6 +60,24 @@ async function initPro() {
       },
     },
   })
+
+  // After pro.init (which may rebuild constants), ensure free-plan users are unlimited
+  try {
+    const licenses: any[] = [
+      // @ts-ignore self-hosted free
+      pro?.constants?.licenses?.SELF_FREE_LICENSE,
+      // @ts-ignore cloud free
+      pro?.constants?.licenses?.CLOUD_FREE_LICENSE,
+    ].filter(Boolean)
+
+    for (const lic of licenses) {
+      if (lic?.quotas?.usage?.static?.users) {
+        lic.quotas.usage.static.users.value = -1
+      }
+    }
+  } catch (err) {
+    // non-fatal
+  }
 }
 
 export async function startup(
