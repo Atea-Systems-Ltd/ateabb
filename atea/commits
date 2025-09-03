@@ -1,0 +1,32 @@
+7bde3427aa
+"
+are you sure thats the root cause? Before these changes the app would start up with unlimited users but revert at some future time. and also revert backl to unlimited. do these symptoms correlate with your explanation?"
+
+Short answer: yes — the “unlimited → 20 → unlimited” oscillation matches the license cache + dual‑service init order problem.
+
+Why this matches your symptoms
+
+Two services, different sources: Both worker and server attach a license on every request via pro.licensing() middleware. If one process returns a license with users = -1 while the other returns 20, the UI can “flip” depending on which API you hit last.
+Worker attaches pro licensing here: packages/worker/src/api/index.ts
+Server attaches pro licensing here: packages/server/src/api/index.ts
+Cache refreshes: The pro SDK caches the license per tenant with a TTL. On refresh it either:
+fetches from the account portal, or
+falls back to the “free license” constants (which default users to 20).
+This explains “it was unlimited, then later turned 20” after a refresh.
+Earlier override only in worker: Before my change, only the worker had an override (your existing init did that), so:
+At startup, calls hitting the worker looked unlimited.
+After a cache refresh or when hitting server-first routes, the server repopulated from default constants (20), so it reverted.
+Hitting worker endpoints again made it look unlimited again.
+What I did to stop the flip
+
+Worker: Set free-plan users to unlimited before UserDB.init so the DB and worker middleware start from -1.
+packages/worker/src/sdk/users/index.ts
+Server: After pro.init() (which can rebuild constants), set free-plan users to -1 so server middleware and any license refreshes also use unlimited.
+packages/server/src/startup/index.ts
+Result
+
+Both processes now mutate the same source (pro free license constants) they use to populate license, and they do it after any rebuild. Cache refreshes won’t reintroduce “20”, so the UI should stop oscillating.
+Optional cleanups
+
+The builder store forces userLimit = 50, which can confuse things:
+packages/builder/src/stores/portal/licensing.ts
