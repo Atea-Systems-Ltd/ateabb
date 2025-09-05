@@ -20,7 +20,16 @@ export const initPro = async () => {
         license.quotas.usage.static.users.value = -1
       }
       // Enable desired features explicitly
-      license.features = [Feature.BRANDING, Feature.OFFLINE]
+      license.features = [
+        Feature.BRANDING,
+        Feature.OFFLINE,
+        Feature.CUSTOM_APP_SCRIPTS,
+        Feature.ENVIRONMENT_VARIABLES,
+        Feature.PDF,
+        Feature.PWA,
+        Feature.SYNC_AUTOMATIONS,
+        Feature.TRIGGER_AUTOMATION_RUN,
+      ]
     } catch (err) {
       // swallow to avoid boot failure if license shape changes
     }

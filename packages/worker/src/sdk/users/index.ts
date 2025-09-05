@@ -1,6 +1,7 @@
 export * from "./users"
 import { users } from "@budibase/backend-core"
 import * as pro from "@budibase/pro"
+import { Feature } from "@budibase/types"
 
 // Ensure free-plan user limits are overridden before UserDB.init runs
 try {
@@ -17,6 +18,17 @@ try {
     if (lic?.quotas?.usage?.static?.users) {
       lic.quotas.usage.static.users.value = -1
     }
+    // Enable desired features explicitly
+    lic.features = [
+      Feature.BRANDING,
+      Feature.OFFLINE,
+      Feature.CUSTOM_APP_SCRIPTS,
+      Feature.ENVIRONMENT_VARIABLES,
+      Feature.PDF,
+      Feature.PWA,
+      Feature.SYNC_AUTOMATIONS,
+      Feature.TRIGGER_AUTOMATION_RUN,
+    ]
   }
 } catch (err) {
   // non-fatal: if structure changes, continue with defaults

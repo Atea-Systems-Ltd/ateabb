@@ -28,6 +28,7 @@ import { Server } from "http"
 import { AddressInfo } from "net"
 import fs from "fs"
 import bson from "bson"
+import { Feature } from "@budibase/types"
 
 export type State = "uninitialised" | "starting" | "ready"
 let STATE: State = "uninitialised"
@@ -70,10 +71,21 @@ async function initPro() {
       pro?.constants?.licenses?.CLOUD_FREE_LICENSE,
     ].filter(Boolean)
 
-    for (const lic of licenses) {
-      if (lic?.quotas?.usage?.static?.users) {
-        lic.quotas.usage.static.users.value = -1
+    for (const license of licenses) {
+      if (license?.quotas?.usage?.static?.users) {
+        license.quotas.usage.static.users.value = -1
       }
+      // Enable desired features explicitly
+      license.features = [
+        Feature.BRANDING,
+        Feature.OFFLINE,
+        Feature.CUSTOM_APP_SCRIPTS,
+        Feature.ENVIRONMENT_VARIABLES,
+        Feature.PDF,
+        Feature.PWA,
+        Feature.SYNC_AUTOMATIONS,
+        Feature.TRIGGER_AUTOMATION_RUN,
+      ]
     }
   } catch (err) {
     // non-fatal
