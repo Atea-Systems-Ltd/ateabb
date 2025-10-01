@@ -35,24 +35,26 @@ build-ag-1:
 	[ -e "$(DOCKER_DROPIN_SERVICE_FILE)" ] && mv "$(DOCKER_DROPIN_SERVICE_FILE)" "$(DOCKER_DROPIN_SERVICE_FILE).disabled" && systemctl daemon-reload || true
 
 	systemctl daemon-reload
-	docker system prune -a --volumes --force
-	systemctl restart docker
+#	docker system prune -a --volumes --force
+#	systemctl restart docker
 	yarn cache clean
 	yarn clean
 	yarn install
 
 build-ag-2:
 	yarn build
-	docker pull curlimages/curl
-	systemctl restart docker
+	docker pull docker.io/curlimages/curl:latest
+#	systemctl restart docker
 	docker compose --env-file hosting/hosting.properties -f hosting/docker-compose.dev.yaml -f hosting/docker-compose.build.yaml create --build --remove-orphans
+#	podman-compose --env-file hosting/hosting.properties -f hosting/docker-compose.dev.yaml -f hosting/docker-compose.build.yaml up --build --remove-orphans
+	
 	docker tag hosting-worker-service budibase/worker
 	docker tag hosting-app-service budibase/apps
 	docker tag budibase/couchdb:v3.3.3-sqs-v2.1.1 ibmcom/couchdb3
 	# Restore drop-in if we had disabled it
 	[ -e "$(DOCKER_DROPIN_SERVICE_FILE).disabled" ] && mv "$(DOCKER_DROPIN_SERVICE_FILE).disabled" "$(DOCKER_DROPIN_SERVICE_FILE)" && systemctl daemon-reload || true
 	# systemctl start firewalld  # shouldn't need this
-	systemctl restart docker
+#	systemctl restart docker
 
 	mkdir -p "$(BB_DIR)" || true
 	yarn build:docker:airgap

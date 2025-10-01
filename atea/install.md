@@ -13,9 +13,28 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ## install node 22.16
 
 ```
-nvm install 22.16
-npm i -f yarn
+nvm install 22.16 # Not higher!
+npm i -g yarn
 npm i -g lerna
+```
+
+## additional dependencies
+
+```
+# as root
+dnf groupinstall -y "Development Tools"
+dnf install -y python3 python3-devel git
+# verify
+which g++ && g++ --version
+```
+
+If you're using podman:
+
+```
+sudo dnf -y install podman podman-compose
+# sanity
+podman --version
+podman-compose --version
 ```
 
 ## create airgapped archive
