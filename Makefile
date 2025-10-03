@@ -27,7 +27,10 @@ build-airgapped: build-ag-1 build-ag-2
 build-ag-1:
 	systemctl stop ateabb || true
 	systemctl stop firewalld
-	[ -e "$(FIREWALL_SCRIPT)" ] || install -m 0755 ./atea/firewall.sh "$(FIREWALL_SCRIPT)"
+#	need to disable the container filewall rules to enable the build process to fetch files
+	firewall-cmd --permanent --direct --remove-rules ipv4 filter DOCKER-USER || true
+	firewall-cmd --reload
+#	[ -e "$(FIREWALL_SCRIPT)" ] || install -m 0755 ./atea/firewall.sh "$(FIREWALL_SCRIPT)"
 	[ -e "$(ATEABB_SERVICE_FILE)" ] || { cp ./atea/ateabb.service "$(ATEABB_SERVICE_FILE)"; systemctl enable "$(notdir $(ATEABB_SERVICE_FILE))" || systemctl enable "$(ATEABB_SERVICE_FILE)"; }
 
 	install -d "$(dir $(DOCKER_DROPIN_SERVICE_FILE))"
