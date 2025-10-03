@@ -58,29 +58,14 @@ build-ag-2:
 
 	mkdir -p "$(BB_DIR)" || true
 	yarn build:docker:airgap
-	mv bb-airgapped.tar.gz "$(ATEABB_LIVE)"
 
 	mkdir -p "$(BB_DIR_LIVE)/bin" || true
+	mv bb-airgapped.tar.gz "$(ATEABB_LIVE)"
 	cp ./atea/*.sh "$(BB_DIR_LIVE)/bin" || true
 	chmod 755 "$(BB_DIR_LIVE)/bin"/*.sh
 
 	rm -rf "$(ATEABB_LIVE)/hosting"
 	cd "$(ATEABB_LIVE)" && tar -xf bb-airgapped.tar.gz
-
-# 	cd "$(BB_DIR_LIVE)" && sed -i '/LOG_LEVEL: trace/a\      ATEA_APP_MAP: "ATEA_FTR_USER:BASIC:ftr,ATEA_FTR_POWER:POWER:ftr,ATEA_FTR_ADMIN:ADMIN:ftr"' docker-compose.yaml
-# 	cd "$(BB_DIR_LIVE)" && sed -i '/environment:/a\      TZ: ${TZ}' docker-compose.yaml
-# 	cd "$(BB_DIR_LIVE)" && sed -i '/image:/a\    pull_policy: never' docker-compose.yaml
-# 	cd "$(BB_DIR_LIVE)" && sed -i 's|.*budibase/couchdb.*|    image: ibmcom/couchdb3|g' docker-compose.yaml
-# 	cd "$(BB_DIR_LIVE)" && sed -i 's/BB_ADMIN_USER_EMAIL=/BB_ADMIN_USER_EMAIL=support@ateasystems.com/g' .env
-# 	cd "$(BB_DIR_LIVE)" && sed -i 's/BB_ADMIN_USER_PASSWORD=/BB_ADMIN_USER_PASSWORD=4734_Systems/g' .env
-# 	cd "$(BB_DIR_LIVE)" && sed -i 's/REDIS_PORT=6379/REDIS_PORT=6380/g' .env
-# 	cd "$(BB_DIR_LIVE)" && echo "ENCRYPTION_KEY=4734_Systems" >> .env
-# 	cd "$(BB_DIR_LIVE)" && echo "SELF_HOSTED=1" >> .env
-# 	cd "$(BB_DIR_LIVE)" && echo "DISABLE_ACCOUNT_PORTAL=1" >> .env
-# 	cd "$(BB_DIR_LIVE)" && echo "OFFLINE_MODE=1" >> .env
-# 	cd "$(BB_DIR_LIVE)" && echo "ACCOUNT_PORTAL_URL=" >> .env
-# 	cd "$(BB_DIR_LIVE)" && echo "BUDICLOUD_URL=" >> .env
-# 	cd "$(BB_DIR_LIVE)" && echo "DEFAULT_LICENSE=" >> .env
 	cd "$(BB_DIR_LIVE)" && echo "TZ=$$(timedatectl status | grep 'Time zone:' | awk '{print $$3}')" >> .env
 	
 
