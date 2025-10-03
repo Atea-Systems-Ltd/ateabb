@@ -1,5 +1,3 @@
-version: "3"
-
 # optional ports are specified throughout for more advanced use cases.
 
 services:
@@ -108,7 +106,7 @@ services:
 
   couchdb-service:
     restart: unless-stopped
-    image: ibmcom/couchdb3
+    image: budibase/couchdb:v3.3.3-sqs-v2.1.1
     pull_policy: never
     environment:
       - TZ=${TZ}
