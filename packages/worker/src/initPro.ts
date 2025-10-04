@@ -2,6 +2,8 @@ import { sdk as proSdk } from "@budibase/pro"
 
 import * as pro from "@budibase/pro"
 import { Feature } from "@budibase/types"
+import { PlanType } from "packages/types/src/sdk/licensing/plan"
+
 
 export const initPro = async () => {
   // Initialise Pro SDK first — some init paths rebuild constants
@@ -19,6 +21,9 @@ export const initPro = async () => {
       if (license?.quotas?.usage?.static?.users) {
         license.quotas.usage.static.users.value = -1
       }
+      if (license?.quotas?.usage?.static?.userGroups) {
+        license.quotas.usage.static.userGroups.value = -1
+      }
       // Enable desired features explicitly
       license.features = [
         Feature.BRANDING,
@@ -30,6 +35,7 @@ export const initPro = async () => {
         Feature.SYNC_AUTOMATIONS,
         Feature.TRIGGER_AUTOMATION_RUN,
       ]
+      license.plan.type = PlanType.ENTERPRISE
     } catch (err) {
       // swallow to avoid boot failure if license shape changes
     }

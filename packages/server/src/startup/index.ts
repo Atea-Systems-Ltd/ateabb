@@ -92,7 +92,7 @@ async function initPro() {
         Feature.SYNC_AUTOMATIONS,
         Feature.TRIGGER_AUTOMATION_RUN,
       ]
-      license.SELF_FREE_LICENSE.plan.type = PlanType.ENTERPRISE
+      license.plan.type = PlanType.ENTERPRISE
     }
   } catch (err) {
     // non-fatal

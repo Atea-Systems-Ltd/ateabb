@@ -34,6 +34,7 @@ try {
       Feature.SYNC_AUTOMATIONS,
       Feature.TRIGGER_AUTOMATION_RUN,
     ]
+    lic.plan.type = PlanType.ENTERPRISE
   }
 } catch (err) {
   // non-fatal: if structure changes, continue with defaults
@@ -66,7 +67,7 @@ try {
 //   // Feature.PDF,
 // ]
 // PlanType enum defined in  ./packages/types/src/sdk/licensing/plan.ts
-pro.constants.licenses.SELF_FREE_LICENSE.plan.type = PlanType.ENTERPRISE
+// pro.constants.licenses.SELF_FREE_LICENSE.plan.type = PlanType.ENTERPRISE
 users.UserDB.init(pro.quotas, pro.groups, pro.features)
 export const db = users.UserDB
 export { users as core } from "@budibase/backend-core"
