@@ -1,16 +1,15 @@
 
 [Unit]
 Description=Compose-managed Docker application
-Requires=docker.service
-After=docker.service network.target
+After=network.target
 
 [Service]
-Type=exec
-ExecStart=/usr/bin/docker run -p 10000:80 -p 15984:5984 ateabb/single --remove-orphans
-ExecStop=/usr/bin/docker down ateabb/single
+ExecStart=/usr/bin/docker start -a ateabb
+ExecStop=/usr/bin/docker stop -t 10 ateabb
 Restart=on-failure
 RestartSec=10
 TimeoutStartSec=0
 
 [Install]
 WantedBy=multi-user.target
+
