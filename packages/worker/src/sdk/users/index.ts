@@ -2,6 +2,7 @@ export * from "./users"
 import { users } from "@budibase/backend-core"
 import * as pro from "@budibase/pro"
 import { Feature } from "@budibase/types"
+import { PlanType } from "packages/types/src/sdk/licensing/plan"
 
 // Ensure free-plan user limits are overridden before UserDB.init runs
 try {
@@ -65,7 +66,7 @@ try {
 //   // Feature.PDF,
 // ]
 // PlanType enum defined in  ./packages/types/src/sdk/licensing/plan.ts
-// pro.constants.licenses.SELF_FREE_LICENSE.plan.type = PlanType.ENTERPRISE
+pro.constants.licenses.SELF_FREE_LICENSE.plan.type = PlanType.ENTERPRISE
 users.UserDB.init(pro.quotas, pro.groups, pro.features)
 export const db = users.UserDB
 export { users as core } from "@budibase/backend-core"

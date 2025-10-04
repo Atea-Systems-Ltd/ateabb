@@ -29,6 +29,8 @@ import { AddressInfo } from "net"
 import fs from "fs"
 import bson from "bson"
 import { Feature } from "@budibase/types"
+import { PlanType } from "packages/types/src/sdk/licensing/plan"
+
 
 export type State = "uninitialised" | "starting" | "ready"
 let STATE: State = "uninitialised"
@@ -90,6 +92,7 @@ async function initPro() {
         Feature.SYNC_AUTOMATIONS,
         Feature.TRIGGER_AUTOMATION_RUN,
       ]
+      license.SELF_FREE_LICENSE.plan.type = PlanType.ENTERPRISE
     }
   } catch (err) {
     // non-fatal
