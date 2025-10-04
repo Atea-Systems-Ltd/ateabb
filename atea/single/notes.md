@@ -1,41 +1,33 @@
 # ATEABB - Build-single
 
-1. Install docker, node(v22.16), yarn, lerna
-2. If the firewall is blocking outbound connections rom containers it needs to be disabled
+Use `make build-airgapped` to build the multi-image version, then
 
-   ```bash
-   firewall-cmd --permanent --direct --remove-rules ipv4 filter DOCKER-USER || true
-   firewall-cmd --reload
-   ```
-
-3. git clone <https://github.com/Atea-Systems-Ltd/ateabb.git> && cd ateabb
-4. node ./hosting/scripts/setup.js && yarn && yarn build
-5. yarn build:docker:single
-
-At this point you should see an image in docker:
-
-```text
-docker image ls
-REPOSITORY      TAG       IMAGE ID       CREATED          SIZE
-ateabb/single   latest    6836611821e5   25 minutes ago   1.72GB
+```bash
+yarn build:docker:single
 ```
 
-You can start it with `docker run -p 10000:80 ateabb/single`
-
-Configure the proxy to map to port 10000
+This will create a docker image `ateabb/single`. You can start it with `docker run --name ateabb -p 10000:80 -p 15984:5984 ateabb/single`
 
 ## Export
 
-You can export the image: `docker save -o ateabb-single.tar ateabb/single:latest
+```bash
+docker save -o /tmp/ateabb-single.tar ateabb/single
+zip /tmp/ateabb-single.zip -j /tmp/ateabb-single.tar ./atea/ateabb.service`
+```
 
 ## Import
 
-Load the file and run it for the first time to create the container. The stop it, enable to service file, and start the service.
-
-```
-docker load -i ateabb-single.tar
+```bash
+unzip ateabb-single.zip -d /tmp
+docker load -i /tmp/ateabb-single.tar
+mv /tmp/ateabb.service /etc/systemd/system
 /usr/bin/docker run --name ateabb -p 10000:80 -p 15984:5984 ateabb/single:latest
+```
+
+Confirm ateabb is up and running, then...
+
+```bash
 docker down ateabb
-cp ateabb.service /etc/systemd/system
 systemctl enable ateabb
+systemctl start ateabb
 ```
