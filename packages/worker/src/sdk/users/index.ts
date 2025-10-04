@@ -18,9 +18,13 @@ try {
     if (lic?.quotas?.usage?.static?.users) {
       lic.quotas.usage.static.users.value = -1
     }
+    if (lic?.quotas?.usage?.static?.userGroups) {
+      lic.quotas.usage.static.userGroups.value = -1
+    }
     // Enable desired features explicitly
     lic.features = [
       Feature.BRANDING,
+      Feature.USER_GROUPS,
       Feature.OFFLINE,
       Feature.CUSTOM_APP_SCRIPTS,
       Feature.ENVIRONMENT_VARIABLES,

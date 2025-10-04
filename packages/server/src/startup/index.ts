@@ -75,9 +75,13 @@ async function initPro() {
       if (license?.quotas?.usage?.static?.users) {
         license.quotas.usage.static.users.value = -1
       }
+      if (license?.quotas?.usage?.static?.userGroups) {
+        license.quotas.usage.static.userGroups.value = -1
+      }
       // Enable desired features explicitly
       license.features = [
         Feature.BRANDING,
+        Feature.USER_GROUPS,
         Feature.OFFLINE,
         Feature.CUSTOM_APP_SCRIPTS,
         Feature.ENVIRONMENT_VARIABLES,

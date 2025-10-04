@@ -195,14 +195,14 @@ class LicensingStore extends BudiStore<LicensingState> {
     const isBusinessPlan = planType === Constants.PlanType.BUSINESS
     const isEnterpriseTrial =
       planType === Constants.PlanType.ENTERPRISE_BASIC_TRIAL
-    const groupsEnabled = features.includes(Constants.Features.USER_GROUPS)
-    // *** const groupsEnabled = true
+    //const groupsEnabled = features.includes(Constants.Features.USER_GROUPS)
+    const groupsEnabled = true
     const backupsEnabled = features.includes(Constants.Features.APP_BACKUPS)
     const scimEnabled = features.includes(Constants.Features.SCIM)
-    const environmentVariablesEnabled = features.includes(
-      Constants.Features.ENVIRONMENT_VARIABLES
-    )
-    //  const environmentVariablesEnabled = true
+    //const environmentVariablesEnabled = features.includes(
+    //  Constants.Features.ENVIRONMENT_VARIABLES
+    //)
+    const environmentVariablesEnabled = true
     const enforceableSSO = features.includes(Constants.Features.ENFORCEABLE_SSO)
     //    const brandingEnabled = features.includes(Constants.Features.BRANDING)
     const brandingEnabled = true
