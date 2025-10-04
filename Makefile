@@ -62,6 +62,7 @@ build-ag-2:
 	mkdir -p "$(BB_DIR)" || true
 	yarn build:docker:airgap
 
+build-ag-3:
 	mkdir -p "$(BB_DIR_LIVE)/bin" || true
 	mv bb-airgapped.tar.gz "$(ATEABB_LIVE)"
 	cp ./atea/*.sh "$(BB_DIR_LIVE)/bin" || true

@@ -27,6 +27,7 @@ export const initPro = async () => {
       // Enable desired features explicitly
       license.features = [
         Feature.BRANDING,
+	Feature.USER_GROUPS,
         Feature.OFFLINE,
         Feature.CUSTOM_APP_SCRIPTS,
         Feature.ENVIRONMENT_VARIABLES,
