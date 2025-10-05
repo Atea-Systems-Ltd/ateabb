@@ -61,6 +61,7 @@ build-ag-2:
 
 	mkdir -p "$(BB_DIR)" || true
 	yarn build:docker:airgap
+	yarn build:docker:single
 
 build-ag-3:
 	mkdir -p "$(BB_DIR_LIVE)/bin" || true
