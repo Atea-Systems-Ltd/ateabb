@@ -190,12 +190,12 @@
     }
     config = {
       faviconUrl: $organisation.faviconUrl,
-      logoUrl: "https://www.ateasystems.com/_nuxt/img/a3fe173.svg",
-      platformTitle: ateaSystems,
-      emailBrandingEnabled: true,
-      loginHeading: "Welcome to " + ateaSystems,
-      loginButton: "Login",
-      testimonialsEnabled: false,
+      logoUrl: $organisation.logoUrl,
+      platformTitle: $organisation.platformTitle,
+      emailBrandingEnabled: $organisation.emailBrandingEnabled,
+      loginHeading: $organisation.loginHeading,
+      loginButton: $organisation.loginButton,
+      testimonialsEnabled: $organisation.testimonialsEnabled,
       metaDescription: $organisation.metaDescription,
       metaImageUrl: $organisation.metaImageUrl,
       metaTitle: $organisation.metaTitle,
