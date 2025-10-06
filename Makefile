@@ -22,6 +22,18 @@ rebuildnoclean:
 	ATEA_APP_NAME="Saschas SSO Test app" ATEA_APP_UCMGROUP="ATEA_SCM_ADMIN" yarn build
 	systemctl start ateabb
 
+build-single:
+	yarn clean
+	yarn install
+	NX_DAEMON=false yarn build
+	docker pull docker.io/curlimages/curl:latest
+	docker compose --env-file hosting/hosting.properties -f hosting/docker-compose.dev.yaml -f hosting/docker-compose.build.yaml create --build --remove-orphans
+	docker tag hosting-worker-service budibase/worker
+	docker tag hosting-app-service budibase/apps
+	docker tag budibase/couchdb:v3.3.3-sqs-v2.1.1 ibmcom/couchdb3
+	yarn build:docker:airgap
+	yarn build:docker:single
+
 build-airgapped: build-ag-1 build-ag-2
 
 build-ag-1:
@@ -45,7 +57,7 @@ build-ag-1:
 	yarn install
 
 build-ag-2:
-	yarn build
+	NX_DAEMON=false yarn build
 	docker pull docker.io/curlimages/curl:latest
 #	systemctl restart docker
 	docker compose --env-file hosting/hosting.properties -f hosting/docker-compose.dev.yaml -f hosting/docker-compose.build.yaml create --build --remove-orphans

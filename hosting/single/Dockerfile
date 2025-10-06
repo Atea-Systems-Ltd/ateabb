@@ -4,6 +4,8 @@ FROM node:22-slim AS build
 # install node-gyp dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends g++ make python3 jq
 
+ENV ENCRYPTION_KEY=$ENCRYPTION_KEY
+
 # copy and install dependencies
 WORKDIR /app
 COPY package.json .

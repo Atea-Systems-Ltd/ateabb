@@ -2,6 +2,8 @@
 
 echo "Starting runner.sh..."
 
+export ENCRYPTION_KEY="${ENCRYPTION_KEY:-4734_Systems}"
+
 # set defaults for Docker-related variables
 export APP_PORT="${APP_PORT:-4001}"
 export ARCHITECTURE="${ARCHITECTURE:-amd}"
