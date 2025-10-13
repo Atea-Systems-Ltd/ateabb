@@ -70,9 +70,10 @@
 
 <svelte:window on:keydown={handleKeydown} />
 {#if loaded}
-  <Layout gap="L" noPadding>
-    <Layout justifyItems="center" noPadding>
-  {#if loaded}
+  <div class="login-wrapper">
+    <Layout gap="L" noPadding>
+      <Layout justifyItems="center" noPadding>
+    {#if loaded}
         <img
           alt="logo"
           src="https://www.ateasystems.com/_nuxt/img/a3fe173.svg"
@@ -164,15 +165,23 @@
         </Link>
       </Body>
     {/if}
-  </Layout>
+    </Layout>
+  </div>
 {/if}
 
 <style>
+  .login-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+  }
   .user-actions {
     display: flex;
     align-items: center;
   }
   img {
+    padding-top: 40px;
     width: 100px;
   }
 </style>
+

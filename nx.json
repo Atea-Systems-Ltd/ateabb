@@ -10,6 +10,7 @@
   "targetDefaults": {
     "build": {
       "inputs": [
+	"default",
         "{workspaceRoot}/scripts/*",
         "{workspaceRoot}/lerna.json",
         "{workspaceRoot}/.github/workflows/*",
