@@ -5,6 +5,7 @@ FROM node:22-slim AS build
 RUN apt-get update && apt-get install -y --no-install-recommends g++ make python3 jq
 
 ENV ENCRYPTION_KEY=$ENCRYPTION_KEY
+ENV TZ=$TZ
 
 # copy and install dependencies
 WORKDIR /app
@@ -58,6 +59,9 @@ RUN apt install -y software-properties-common apt-transport-https ca-certificate
 
 # We use pm2 in order to run multiple node processes in a single container
 RUN npm install --global pm2
+
+# timezone
+RUN apk add --no-cache tzdata
 
 # setup nginx
 COPY hosting/single/nginx/nginx.conf /etc/nginx
