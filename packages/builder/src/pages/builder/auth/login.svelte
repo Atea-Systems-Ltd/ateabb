@@ -72,14 +72,14 @@
 {#if loaded}
   <Layout gap="L" noPadding>
     <Layout justifyItems="center" noPadding>
-      {#if loaded}
+  {#if loaded}
         <img
           alt="logo"
           src="https://www.ateasystems.com/_nuxt/img/a3fe173.svg"
         />
-      {/if}
+      {/if} 
       <Heading size="M">
-        {"Log in to Ātea Systems"}
+        {"Login to Ātea Systems"}
       </Heading>
     </Layout>
     <Layout gap="S" noPadding>
@@ -173,6 +173,6 @@
     align-items: center;
   }
   img {
-    width: 48px;
+    width: 100px;
   }
 </style>
