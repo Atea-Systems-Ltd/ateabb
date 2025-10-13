@@ -61,7 +61,7 @@ RUN apt install -y software-properties-common apt-transport-https ca-certificate
 RUN npm install --global pm2
 
 # timezone
-RUN apk add --no-cache tzdata
+RUN apt install -y tzdata
 
 # setup nginx
 COPY hosting/single/nginx/nginx.conf /etc/nginx
