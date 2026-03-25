@@ -21,7 +21,7 @@ zip /tmp/ateabb-single.zip -j /tmp/ateabb-single.tar ./atea/single/ateabb.servic
 unzip ateabb-single.zip -d /tmp
 docker load -i /tmp/ateabb-single.tar && rm -f /tmp/ateabb-single.tar
 mv /tmp/ateabb.service /etc/systemd/system
-/usr/bin/docker create --name ateabb -p 10000:80 -p 15984:5984 ateabb/single
+/usr/bin/docker create --name ateabb -p 10000:80 -p 15984:5984 -e ATEA_APP_MAP="ATEA_CFE_USER:BASIC:TEST,ATEA_CFE_POWER:POWER:TEST,ATEA_CFE_ADMIN:ADMIN:TEST" ateabb/single
 ```
 
 Confirm ateabb is up and running, then...
