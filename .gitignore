@@ -114,4 +114,4 @@ budibase-datasource
 .nx
 .claude
 yarn.lock
-bb-airgapped
+bb-airgapped*

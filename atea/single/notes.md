@@ -15,7 +15,7 @@ docker save -o /tmp/ateabb-single.tar ateabb/single
 zip /tmp/ateabb-single.zip -j /tmp/ateabb-single.tar ./atea/single/ateabb.service`
 ```
 
-## Import
+## Import (Docker)
 
 ```bash
 #you only have to create the volume on a new install..
@@ -33,3 +33,15 @@ docker down ateabb
 systemctl enable ateabb
 systemctl start ateabb
 ```
+
+## Import (Podman)
+```
+FILE="/atea/tmp/ateabb-single.tar"
+podman volume create ateabb_data
+podman load -i "$FILE"
+podman create --name ateabb --mount type=volume,src=ateabb_data,dst=/data -p 10000:80 -p 15984:5984 -e ATEA_APP_MAP="ATEA_CFE_USER:BASIC:TEST,ATEA_CFE_POWER:POWER:TEST,ATEA_CFE_ADMIN:ADMIN:TEST" ateabb/single
+podman generate systemd --name ateabb > /etc/systemd/system/ateabb.service
+systemctl enable ateabb
+systemctl start ateabb
+```
+
