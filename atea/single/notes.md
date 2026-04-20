@@ -35,7 +35,8 @@ systemctl start ateabb
 ```
 
 ## Import (Podman)
-```
+
+``` bash
 FILE="/atea/tmp/ateabb-single.tar"
 podman volume create ateabb_data
 podman load -i "$FILE"
@@ -44,4 +45,3 @@ podman generate systemd --name ateabb > /etc/systemd/system/ateabb.service
 systemctl enable ateabb
 systemctl start ateabb
 ```
-
