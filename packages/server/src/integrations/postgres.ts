@@ -356,7 +356,7 @@ class PostgresIntegration extends Sql implements DatasourcePlus {
       .split(",")
       .map(item => `"${item.trim()}"`)
     await this.client.query(`SET search_path TO ${search_path.join(",")};`)
-    await this.client.query(`SET TIME ZONE 'UTC';`)
+    // await this.client.query(`SET TIME ZONE 'UTC';`)
     this.open = true
   }
 

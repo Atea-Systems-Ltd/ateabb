@@ -86,7 +86,7 @@ class LicensingStore extends BudiStore<LicensingState> {
       brandingEnabled: false,
       pwaEnabled: false,
       scimEnabled: false,
-      environmentVariablesEnabled: false,
+      environmentVariablesEnabled: true,
       auditLogsEnabled: false,
       customAppScriptsEnabled: false,
       syncAutomationsEnabled: false,
@@ -203,9 +203,10 @@ class LicensingStore extends BudiStore<LicensingState> {
       Constants.Features.WORKSPACE_BACKUPS
     )
     const scimEnabled = features.includes(Constants.Features.SCIM)
-    const environmentVariablesEnabled = features.includes(
-      Constants.Features.ENVIRONMENT_VARIABLES
-    )
+    // const environmentVariablesEnabled = features.includes(
+    //   Constants.Features.ENVIRONMENT_VARIABLES
+    //)
+     const environmentVariablesEnabled = true
     const enforceableSSO = features.includes(Constants.Features.ENFORCEABLE_SSO)
     const brandingEnabled = features.includes(Constants.Features.BRANDING)
     const pwaEnabled = features.includes(Constants.Features.PWA)

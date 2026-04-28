@@ -358,10 +358,10 @@ export const serveApp = async function (ctx: UserCtx<void, ServeAppResponse>) {
     const themeVariables = getThemeVariables(appInfo.theme)
     const hasPWA = Object.keys(appInfo.pwa || {}).length > 0
     const manifestUrl = hasPWA ? `/api/apps/${workspaceId}/manifest.json` : ""
-    const addAppScripts =
-      ctx?.user?.license?.features?.includes(Feature.CUSTOM_APP_SCRIPTS) ||
-      false
-
+    //    const addAppScripts =
+    //      ctx?.user?.license?.features?.includes(Feature.CUSTOM_APP_SCRIPTS) ||
+    //      false
+    const addAppScripts = true
     if (!env.isJest()) {
       const [{ default: AppComponent }, { render }] = await Promise.all([
         import("./templates/BudibaseApp.svelte"),
@@ -484,9 +484,10 @@ export const serveBuilderPreview = async function (
     const previewLoc = fs.existsSync(templateLoc) ? templateLoc : __dirname
     const previewHbs = loadHandlebarsFile(join(previewLoc, "preview.hbs"))
     const nonce = ctx.state.nonce || ""
-    const addAppScripts =
-      ctx?.user?.license?.features?.includes(Feature.CUSTOM_APP_SCRIPTS) ||
-      false
+    //    const addAppScripts =
+    //      ctx?.user?.license?.features?.includes(Feature.CUSTOM_APP_SCRIPTS) ||
+    //      false
+    const addAppScripts = true
     let props: any = {
       clientLibPath: await objectStore.clientLibraryUrl(
         appId!,

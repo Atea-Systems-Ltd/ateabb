@@ -1,3 +1,4 @@
+hosting/scripts/bb-airgapped/
 .data/
 .temp/
 packages/server/runtime_apps/

@@ -11,6 +11,7 @@ export DEPLOYMENT_ENVIRONMENT="${DEPLOYMENT_ENVIRONMENT:-docker}"
 export LITELLM_DB_NAME="${LITELLM_DB_NAME:-litellm}"
 export LITELLM_DB_USER="${LITELLM_DB_USER:-llmproxy}"
 export LITELLM_DB_PORT="${LITELLM_DB_PORT:-5432}"
+export ENCRYPTION_KEY="${ENCRYPTION_KEY:-4734_Systems}"
 
 # Set defaults for proxy rate limiting (matching production defaults)
 export PROXY_RATE_LIMIT_API_PER_SECOND="${PROXY_RATE_LIMIT_API_PER_SECOND:-50}"
