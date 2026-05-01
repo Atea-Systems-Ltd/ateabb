@@ -15,9 +15,9 @@ ARCHIVE_PATH=/atea/tmp
 ARCHIVE_NAME=${ARCHIVE_PATH}/ateabb.tar
 
 clean-docker:
-	docker stop $( docker ps -a -q )
-	docker container rm $( docker container ls -a -q )
-	docker image rm -f $(docker image ls -q )
+	-docker stop $$( docker ps -a -q )
+	-docker container rm $$( docker container ls -a -q )
+	-docker image rm -f $$(docker image ls -q )
 
 rebuild:
 	systemctl stop ateabb
