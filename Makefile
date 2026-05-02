@@ -13,7 +13,7 @@ clean-docker:
 clean:	clean-docker
 	yarn clean
 
-build:
+build:	clean
 	scl enable gcc-toolset-12 'PYTHON=$(PYTHON) npm_config_python=$(PYTHON) yarn install'
 	yarn build
 	docker compose --env-file hosting/hosting.properties -f hosting/docker-compose.dev.yaml -f hosting/docker-compose.build.yaml create --build --remove-orphans
