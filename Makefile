@@ -19,6 +19,7 @@ build:
 	docker compose --env-file hosting/hosting.properties -f hosting/docker-compose.dev.yaml -f hosting/docker-compose.build.yaml create --build --remove-orphans
 	yarn build:docker:single
 	docker tag budibase:latest budibase/budibase
+	mkdir -p $(BB_SUBDIR)
 	yarn build:docker:airgap:single
-	mv $(BB_SUBDIR)/budibase.tar $(ARCHIVE_PATH)/ateabb-$$(jq -r '.version' lerna.json).tar
+	mv -f $(BB_SUBDIR)/budibase.tar $(ARCHIVE_PATH)/ateabb-$$(jq -r '.version' lerna.json).tar
 
