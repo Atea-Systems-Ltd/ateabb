@@ -7,7 +7,7 @@
     href="https://www.budibase.com/?utm_source=budibase-apps-public-screens&utm_medium=badge&utm_campaign=made-in-budibase"
     target="_blank"
   >
-    Made with <span>Budibase</span>
+    Copyright: <span>Ātea Systems Ltd</span>
   </Link>
 </div>
 
