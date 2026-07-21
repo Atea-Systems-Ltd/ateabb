@@ -1,4 +1,4 @@
-import { License, PlanModel, PlanType } from "@budibase/types"
+import { Feature, License, PlanModel, PlanType } from "@budibase/types"
 import * as quotas from "./quotas"
 
 export const UNLIMITED = -1
@@ -43,13 +43,15 @@ export const CLOUD_FREE_LICENSE: License = {
  * The license used when no license is present.
  */
 export const SELF_FREE_LICENSE: License = {
-  features: [],
+  // Enable every feature defined by this Budibase version.
+  features: Object.values(Feature),
+
   quotas: {
     usage: {
       monthly: {
         ...quotas.queries(UNLIMITED),
         ...quotas.automations(UNLIMITED),
-        ...quotas.budibaseAICredits(0),
+        ...quotas.budibaseAICredits(UNLIMITED),
         ...quotas.actions(UNLIMITED),
       },
       static: {
@@ -57,24 +59,24 @@ export const SELF_FREE_LICENSE: License = {
         ...quotas.apps(UNLIMITED),
         ...quotas.users(UNLIMITED),
         ...quotas.creators(UNLIMITED),
-        ...quotas.userGroups(0),
-        ...quotas.plugins(10),
-        ...quotas.customAIConfigurations(0),
+        ...quotas.userGroups(UNLIMITED),
+        ...quotas.plugins(UNLIMITED),
+        ...quotas.customAIConfigurations(UNLIMITED),
       },
     },
     constant: {
-      ...quotas.agentLogRetentionDays(1),
-      ...quotas.automationLogRetentionDays(1),
-      ...quotas.appBackupRetentionDays(0),
+      ...quotas.agentLogRetentionDays(UNLIMITED),
+      ...quotas.automationLogRetentionDays(UNLIMITED),
+      ...quotas.appBackupRetentionDays(UNLIMITED),
     },
   },
+
   plan: {
-    type: PlanType.FREE,
+    type: PlanType.ENTERPRISE,
     usesInvoicing: false,
     model: PlanModel.PER_USER,
   },
 }
-
 /**
  * Unlimited license to support unit tests.
  */
